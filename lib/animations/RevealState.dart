@@ -16,14 +16,13 @@ class RevealState extends State with TickerProviderStateMixin, ControllerCallbac
 
   List<Widget> avatars = [];
 
-  RevealState(this.child) {
-    controller = RevealAnimationController(this, this);
-    waveController = RevealAnimationController(this, this);
-  }
+  RevealState(this.child);
 
   @override
   void initState() {
     super.initState();
+    controller = RevealAnimationController(this, this);
+    waveController = RevealAnimationController(this, this);
     offset = Offset(10,10);
   }
 
@@ -56,7 +55,6 @@ class RevealState extends State with TickerProviderStateMixin, ControllerCallbac
     );
   }
 
-
   void handleTapDown(TapDownDetails e) {
     setState(() {
       setOffset(e);
@@ -83,8 +81,6 @@ class RevealState extends State with TickerProviderStateMixin, ControllerCallbac
     RenderBox box = context.findRenderObject() as RenderBox;
     offset = box.globalToLocal(e.globalPosition);
   }
-
-
 
   Widget drawPaint(CustomPainter paint) {
     return ClipRRect(

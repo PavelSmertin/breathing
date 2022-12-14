@@ -23,10 +23,10 @@ class RevealAnimationController {
   late AnimationController holdController;
 
   late Offset contactPosition;
-  late double maxEpeselent;
+  late double maxEpselent;
   late double maxDistance;
   late double minDistance;
-  late double minEpeselent;
+  late double minEpselent;
   bool upTrend = true;
   DateTime before = DateTime.now();
   DateTime after = DateTime.now();
@@ -40,7 +40,6 @@ class RevealAnimationController {
 
   double MAX_TWEEN_VALUE = 0.715;
   double MIN_TWEEN_VALUE = 0.0;
-
 
   double MAX_HOLD_VALUE = 0.2;
   double MIN_HOLD_VALUE = 0.1;
@@ -65,6 +64,7 @@ class RevealAnimationController {
     alpha = MAX_ALPHA;
     alphaReverse = MIN_ALPHA;
     animationState = AnimStates.NOT_STARTED;
+
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: mixin);
 
@@ -159,10 +159,10 @@ class RevealAnimationController {
     before = DateTime.now();
     after = DateTime.now();
     contactPosition = details.localPosition;
-    maxEpeselent = 0;
+    maxEpselent = 0;
     maxDistance = 0;
     minDistance = 0;
-    minEpeselent = 0;
+    minEpselent = 0;
 
   }
 
@@ -196,14 +196,14 @@ class RevealAnimationController {
   void detectUp(double distance) {
     if( distance >= maxDistance ) {
       maxDistance = distance;
-      maxEpeselent = distance * 0.85;
-    } else if( distance < maxEpeselent ) {
+      maxEpselent = distance * 0.85;
+    } else if( distance < maxEpselent ) {
       after = DateTime.now();
       diff = after.difference(before).inMilliseconds;
       before = after;
       callback.onEventIssue( maxDistance, diff );
       minDistance = maxDistance;
-      minEpeselent = maxDistance * 0.15;
+      minEpselent = maxDistance * 0.15;
       upTrend = false;
     }
   }
@@ -211,13 +211,13 @@ class RevealAnimationController {
   void detectDown(double distance) {
     if( distance <= minDistance ) {
       minDistance = distance;
-    } else if( distance > minEpeselent ) {
+    } else if( distance > minEpselent ) {
       after = DateTime.now();
       diff = after.difference(before).inMilliseconds;
       before = after;
       callback.onEventIssue( minDistance, diff );
       maxDistance = 0;
-      maxEpeselent = 0;
+      maxEpselent = 0;
       upTrend = true;
     }
   }
